@@ -1,17 +1,17 @@
-hpRemaining: 18.2 (13.0877381120226)
-monstersKilled: 2.9 (1.1005049346146119)
-treasuresCollected: 3.5 (0.7071067811865476)
-potionsDrunk: 0.5 (0.5270462766947299)
-actionsTaken: 282.1 (49.974326742171655)
-tilesExplored: 34.0 (4.83045891539648)
-timesCompleted: 1
-timesDied: 1
-timesUncompleted: 8
+hpRemaining: 40.0 (0.0)
+monstersKilled: 0.0 (0.0)
+treasuresCollected: 0.5 (0.5270462766947299)
+potionsDrunk: 0.0 (0.0)
+actionsTaken: 300.0 (0.0)
+tilesExplored: 9.9 (1.5238839267549946)
+timesCompleted: 0
+timesDied: 0
+timesUncompleted: 10
 
-hpRemaining;20.0;2.0;18.0;26.0;5.0;27.0;0.0;40.0;30.0;14.0;
-monstersKilled;2.0;4.0;4.0;2.0;4.0;3.0;4.0;1.0;2.0;3.0;
-treasuresCollected;4.0;4.0;4.0;4.0;4.0;4.0;3.0;2.0;3.0;3.0;
-potionsDrunk;0.0;0.0;1.0;1.0;0.0;1.0;0.0;1.0;1.0;0.0;
-actionsTaken;300.0;300.0;300.0;300.0;280.0;300.0;141.0;300.0;300.0;300.0;
-tilesExplored;27.0;39.0;39.0;39.0;35.0;39.0;28.0;30.0;32.0;32.0;
+hpRemaining;40.0;40.0;40.0;40.0;40.0;40.0;40.0;40.0;40.0;40.0;
+monstersKilled;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;
+treasuresCollected;1.0;0.0;1.0;1.0;0.0;0.0;1.0;0.0;0.0;1.0;
+potionsDrunk;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;
+actionsTaken;300.0;300.0;300.0;300.0;300.0;300.0;300.0;300.0;300.0;300.0;
+tilesExplored;10.0;8.0;13.0;10.0;9.0;9.0;10.0;9.0;9.0;12.0;
 
