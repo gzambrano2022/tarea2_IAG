@@ -45,8 +45,10 @@ public class SimulationMode {
 		PlayMap testPlay = new PlayMap(testDungeon);
 		for(int i=0;i<totalRuns;i++){
 			testPlay.startGame();
-			
-			Controller testAgent = new PathfindingController(testPlay,testPlay.getHero());
+
+            ///  Q_LEARNING AGENTEEEE
+            Controller testAgent = new QLearningController(testPlay, testPlay.getHero());
+            //Controller testAgent = new PathfindingController(testPlay,testPlay.getHero());
 			//Controller testAgent = new ZombieController(testPlay,testPlay.getHero());
 			
 			int actions = 0;
