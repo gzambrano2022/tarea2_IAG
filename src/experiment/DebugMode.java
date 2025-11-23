@@ -33,7 +33,8 @@ public class DebugMode {
 		PlayMap testPlay = new PlayMap(testDungeon);
 		testPlay.startGame();
 
-		Controller testAgent = new RoombaController(testPlay,testPlay.getHero());
+		//Controller testAgent = new RoombaController(testPlay,testPlay.getHero());
+        Controller testAgent = new MCTSController(testPlay,testPlay.getHero());
 
 		int actions = 0;
 
@@ -49,6 +50,6 @@ public class DebugMode {
 	
 	public static void main(String[] args) {
 		DebugMode exp = new DebugMode();
-		exp.runTest("./dungeons/map0.txt");
+		exp.runTest("./dungeons/map3.txt");
 	}
 }

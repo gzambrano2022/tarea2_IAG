@@ -95,9 +95,33 @@ public class PlayMap extends Dungeon implements Cloneable {
 		resetLevel();
 	}
 
+    /**
+     * Lightweight constructor used only for cloning. It skips expensive setup
+     * (finalizeSketch, resetLevel) and reuses the already computed path data.
+     */
+    private PlayMap(PlayMap source){
+        super(source.getMapSizeX(), source.getMapSizeY());
+        this.baseMap = source.baseMap;
+        this.paths = source.paths; // share precomputed paths (map layout is static)
+        this.impassable = Matrix2D.copy(source.impassable);
+        this.exits = copyPointVector(source.exits);
+        this.monsters = copyPointVector(source.monsters);
+        this.rewards = copyPointVector(source.rewards);
+        this.potions = copyPointVector(source.potions);
+        this.entrance = new Point2D(source.entrance);
+    }
+
+    private Vector<Point2D> copyPointVector(Vector<Point2D> original){
+        Vector<Point2D> result = new Vector<Point2D>(original.size());
+        for(Point2D p : original){
+            result.add(new Point2D(p));
+        }
+        return result;
+    }
+
     @Override
     public PlayMap clone(){
-        PlayMap clone = new PlayMap(this.baseMap);
+        PlayMap clone = new PlayMap(this);
 		
 		clone.explored = Matrix2D.copy(this.explored);
 		clone.currentView = Matrix2D.copy(this.currentView);
@@ -123,18 +147,10 @@ public class PlayMap extends Dungeon implements Cloneable {
         clone.setPotionChars(clonePotions);
 
         if(eventLog != null) {
-			Vector cloneEventLog = new Vector(eventLog.size());
-            for(int logItem = 0; logItem < eventLog.size(); logItem++){
-                cloneEventLog.setElementAt(eventLog.get(logItem),logItem);
-            }
-			clone.eventLog = cloneEventLog;
+			clone.eventLog = new Vector<String>(eventLog);
         }
         if(actionLog != null) {
-			Vector cloneActionLog = new Vector(actionLog.size());
-            for(int logItem = 0; logItem < actionLog.size(); logItem++){
-                cloneActionLog.setElementAt(actionLog.get(logItem),logItem);
-            }
-			clone.actionLog = cloneActionLog;
+			clone.actionLog = new Vector<String>(actionLog);
         }
         
 		if(hero!=null){ clone.hero = this.getHero().clone(); }
