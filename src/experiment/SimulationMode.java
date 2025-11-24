@@ -48,6 +48,11 @@ public class SimulationMode {
 
             ///  Q_LEARNING AGENTEEEE
             Controller testAgent = new QLearningController(testPlay, testPlay.getHero());
+
+            ///  MCTS AGENTEEE
+            //Controller testAgent = new MCTSController(testPlay, testPlay.getHero());
+
+
             //Controller testAgent = new PathfindingController(testPlay,testPlay.getHero());
 			//Controller testAgent = new ZombieController(testPlay,testPlay.getHero());
 			
