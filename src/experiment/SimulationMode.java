@@ -47,10 +47,10 @@ public class SimulationMode {
 			testPlay.startGame();
 
             ///  Q_LEARNING AGENTEEEE
-            Controller testAgent = new QLearningController(testPlay, testPlay.getHero());
+            //Controller testAgent = new QLearningController(testPlay, testPlay.getHero());
 
             ///  MCTS AGENTEEE
-            //Controller testAgent = new MCTSController(testPlay, testPlay.getHero());
+            Controller testAgent = new MCTSController(testPlay, testPlay.getHero());
 
 
             //Controller testAgent = new PathfindingController(testPlay,testPlay.getHero());
@@ -77,7 +77,7 @@ public class SimulationMode {
 		System.out.println(printFullMetrics());
 		
 		try { 
-			writeFile(outputFolder+"/finalReport_of_"+mapFile.replace("txt","csv"), new String[]{ printMetrics(maxActions), printFullMetrics() });
+			writeFile(outputFolder+"/finalReportMCTS_of_"+mapFile.replace("txt","csv"), new String[]{ printMetrics(maxActions), printFullMetrics() });
 		} catch(Exception e){
 			System.out.println(e.toString());
 		}

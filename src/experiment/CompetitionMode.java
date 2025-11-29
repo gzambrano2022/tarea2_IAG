@@ -25,10 +25,10 @@ public class CompetitionMode {
 	String outputFolder = "./testResults/";	// this folder needs to already exist, it will not be created by the program
 	
 	String[] controllerNames = {
-		"controllers.RandomController",
-		"controllers.ZombieController",
-		"controllers.RoombaController",
-		"controllers.PathfindingController",
+		//"controllers.RandomController",
+		//"controllers.ZombieController",
+		//"controllers.RoombaController",
+		//"controllers.PathfindingController",
             "controllers.MCTSController",
             "controllers.QLearningController"
 	};

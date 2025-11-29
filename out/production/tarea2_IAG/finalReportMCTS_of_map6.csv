@@ -1,0 +1,17 @@
+hpRemaining: 32.7 (4.2176876234364356)
+monstersKilled: 1.5 (0.5270462766947299)
+treasuresCollected: 3.2 (0.9189365834726815)
+potionsDrunk: 0.9 (0.7378647873726218)
+actionsTaken: 61.8 (28.943623362207664)
+tilesExplored: 31.7 (4.164666186436128)
+timesCompleted: 10
+timesDied: 0
+timesUncompleted: 0
+
+hpRemaining;31.0;32.0;33.0;40.0;30.0;33.0;40.0;30.0;27.0;31.0;
+monstersKilled;2.0;1.0;1.0;2.0;2.0;1.0;2.0;1.0;1.0;2.0;
+treasuresCollected;4.0;1.0;3.0;4.0;4.0;3.0;4.0;3.0;3.0;3.0;
+potionsDrunk;1.0;1.0;0.0;2.0;1.0;1.0;2.0;0.0;0.0;1.0;
+actionsTaken;52.0;40.0;46.0;80.0;134.0;40.0;66.0;50.0;70.0;40.0;
+tilesExplored;32.0;23.0;31.0;37.0;36.0;29.0;36.0;29.0;32.0;32.0;
+
