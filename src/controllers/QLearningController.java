@@ -14,8 +14,8 @@ public class QLearningController extends Controller {
     private Random rng = new Random();
 
     // Hiperparámetros
-    private double alpha = 0.15;        // learning rate
-    private double gamma = 0.95;        // discount factor
+    private double alpha = 0.15;
+    private double gamma = 0.95;
     private static final int NUM_ACTIONS = 4;
 
     // Q-table persistente
@@ -64,7 +64,7 @@ public class QLearningController extends Controller {
     public int getNextAction(){
         String state = buildState();
 
-        // Epsilon-greedy: exploración vs explotación
+        // Epsilon-greedy
         int action;
         if(rng.nextDouble() < epsilon){
             action = getRandomValidAction();
@@ -88,9 +88,7 @@ public class QLearningController extends Controller {
         return action;
     }
 
-    // -----------------
-    // REPRESENTACIÓN DE ESTADO MEJORADA
-    // -----------------
+    // Representacion de estado mejorada
     private String buildState(){
         Point2D hero = controllingChar.getPosition();
         int heroX = (int)hero.x;
@@ -99,36 +97,36 @@ public class QLearningController extends Controller {
 
         StringBuilder state = new StringBuilder();
 
-        // 1. Categoría de HP (discretizada para mejor generalización)
+        // Categoría de HP
         int hpCategory = getHPCategory();
         state.append("HP").append(hpCategory).append("|");
 
-        // 2. Dirección hacia la salida
+        // Dirección hacia la salida
         int dx = (int)(exit.x - hero.x);
         int dy = (int)(exit.y - hero.y);
         String dirExit = getDirectionCode(dx, dy);
         state.append("EXIT").append(dirExit).append("|");
 
-        // 3. Distancia a la salida (categorizada)
+        // Distancia a la salida
         double distToExit = Math.sqrt(dx*dx + dy*dy);
         int distCategory = getDistanceCategory(distToExit);
         state.append("DIST").append(distCategory).append("|");
 
-        // 4. Monstruos cercanos (crítico para sobrevivir)
+        // Monstruos cercanos
         String monsterInfo = getNearbyMonsters(heroX, heroY);
         state.append("MON").append(monsterInfo).append("|");
 
-        // 5. Pociones cercanas (importante cuando HP bajo)
+        // Pociones cercanas
         if(hpCategory <= 2) { // Solo si HP bajo/medio
             String potionInfo = getNearbyPotions(heroX, heroY);
             state.append("POT").append(potionInfo).append("|");
         }
 
-        // 6. Recompensas cercanas
+        // Recompensas cercanas
         int nearbyRewards = countNearbyRewards(heroX, heroY);
         state.append("REW").append(nearbyRewards).append("|");
 
-        // 7. Configuración de paredes (para evitar colisiones)
+        // Configuración de paredes
         state.append("W");
         for(int dir = 0; dir < 4; dir++){
             Point2D nextPos = controllingChar.getNextPosition(dir);
@@ -138,9 +136,7 @@ public class QLearningController extends Controller {
         return state.toString();
     }
 
-    /**
-     * Categoriza HP en 5 niveles
-     */
+    // Categoriza HP en 5 niveles
     private int getHPCategory(){
         int hp = controllingChar.getHitpoints();
         int maxHP = map.getHero().getStartingHitpoints();
@@ -154,7 +150,7 @@ public class QLearningController extends Controller {
     }
 
 
-    //Obtiene código de dirección (N, NE, E, SE, S, SW, W, NW, o HERE)
+    // Obtiene código de dirección
     private String getDirectionCode(int dx, int dy){
         if(Math.abs(dx) < 2 && Math.abs(dy) < 2) return "HERE";
 
@@ -183,7 +179,7 @@ public class QLearningController extends Controller {
     }
 
 
-    //Detecta monstruos cercanos y su dirección
+    // Detecta monstruos cercanos y su dirección
     private String getNearbyMonsters(int heroX, int heroY){
         List<String> threats = new ArrayList<>();
 
@@ -214,7 +210,7 @@ public class QLearningController extends Controller {
         return String.join(",", threats);
     }
 
-    //Detecta pociones cercanas
+    // Detecta pociones cercanas
     private String getNearbyPotions(int heroX, int heroY){
         String closest = "NONE";
         double minDist = Double.MAX_VALUE;
@@ -255,9 +251,7 @@ public class QLearningController extends Controller {
         return count;
     }
 
-    // -----------------
-    // SISTEMA DE RECOMPENSAS MEJORADO
-    // -----------------
+    // Sistema de recompensas
     private double computeReward(){
         double reward = 0;
 
@@ -281,14 +275,14 @@ public class QLearningController extends Controller {
             reward += hpDiff * 1.5;
         }
 
-        // 3. Cambios en score
+        // Cambios en score
         int currentScore = map.getHero().getScore();
         int scoreDiff = currentScore - prevScore;
         if(scoreDiff > 0){
             reward += scoreDiff * 10.0;
         }
 
-        // 4. Progreso hacia la salida
+        // Progreso hacia la salida
         double currentDist = getDistanceToExit();
         if(prevDistance != Double.MAX_VALUE){
             double distDiff = prevDistance - currentDist;
@@ -302,12 +296,12 @@ public class QLearningController extends Controller {
             }
         }
 
-        // 5. Muerte: penalización ENORME
+        // Muerte: penalización ENORME
         if(currentHP <= 0){
             reward -= 150.0;
         }
 
-        // 6. Victoria: recompensa ENORME
+        // Victoria: recompensa ENORME
         Point2D hero = controllingChar.getPosition();
         Point2D exit = map.getExit(1);
         if(hero.isAt(exit)){
@@ -324,13 +318,11 @@ public class QLearningController extends Controller {
         Point2D hero = controllingChar.getPosition();
         Point2D exit = map.getExit(1);
 
-        // Usar distancia Manhattan (más apropiada para grid)
+        // Usar distancia Manhattan
         return Math.abs(exit.x - hero.x) + Math.abs(exit.y - hero.y);
     }
 
-    // -----------------
-    // LÓGICA Q-LEARNING
-    // -----------------
+    // Logica qlearning
     private double[] getQ(String s){
         return qtable.computeIfAbsent(s, k -> new double[NUM_ACTIONS]);
     }
@@ -394,9 +386,7 @@ public class QLearningController extends Controller {
         return validActions.get(rng.nextInt(validActions.size()));
     }
 
-    // -----------------
-    // PERSISTENCIA OPTIMIZADA
-    // -----------------
+    // Persistencia optimizada
     private void loadQtable(){
         try{
             new File("testResults").mkdirs();
